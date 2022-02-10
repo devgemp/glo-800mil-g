@@ -1,1 +1,1 @@
-# Layaout básico de un landing
+# Landing glo-800mil-g
