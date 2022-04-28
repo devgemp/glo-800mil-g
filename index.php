@@ -1,7 +1,18 @@
 <!doctype html>
 <html lang="es">
-
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-198115615-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-198115615-1');
+    </script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +22,6 @@
 
     <!-- Animate On Scroll -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
     <link rel="stylesheet" href="./css/style.css">
 
     <title>GLO</title>
@@ -78,21 +88,21 @@
                             <form action="save.php" method="POST">
                                 <div class="row">
                                     <div class="form-group mb-3">
-                                        <input type="text" class="form-control text-center" name="nombres" aria-describedby="helpId" placeholder="Nombre(s)">
+                                        <input type="text" class="form-control text-center" name="nombres" aria-describedby="helpId" placeholder="Nombre(s)" required>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="text" class="form-control text-center" name="apellidos" aria-describedby="helpId" placeholder="Apellidos">
+                                        <input type="text" class="form-control text-center" name="apellidos" aria-describedby="helpId" placeholder="Apellidos" required>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <select name="sexo" class="form-control text-center">
-                                            <option selected disabled>Sexo</option>
+                                        <select name="sexo" class="form-control text-center" required>
+                                            <option value="" selected disabled>Sexo</option>
                                             <option value="Femenino">Femenino</option>
                                             <option value="Masculino">Masculino</option>
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <select name="edad" class="form-control text-center">
-                                            <option selected disabled>Seleccione Edad</option>
+                                        <select name="edad" class="form-control text-center" required>
+                                            <option value="" selected disabled>Seleccione Edad</option>
                                             <option value="18 a 24 años">18 a 24 años</option>
                                             <option value="25 a 34 años">25 a 34 años</option>
                                             <option value="35 a 49 años">35 a 49 años</option>
@@ -101,14 +111,14 @@
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="email" class="form-control text-center" name="correo" aria-describedby="helpId" placeholder="Email">
+                                        <input type="email" class="form-control text-center" name="correo" aria-describedby="helpId" placeholder="Email" required>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="number" class="form-control text-center" name="telefono" aria-describedby="helpId" placeholder="Teléfono (10 digitos)">
+                                        <input type="number" class="form-control text-center" name="telefono" aria-describedby="helpId" placeholder="Teléfono (10 digitos)" maxlength="10" required>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <select name="importe" class="form-control text-center">
-                                            <option selected disabled>Seleccione el importe</option>
+                                        <select name="importe" class="form-control text-center" required>
+                                            <option value="" selected disabled>Seleccione el importe</option>
                                             <option value="$50,000">$50,000</option>
                                             <option value="$100,000">$100,000</option>
                                             <option value="$150,000">$150,000</option>
@@ -121,12 +131,6 @@
                                             <option value="$3,000,000">$3,000,000</option>
                                         </select>
                                     </div>
-
-                                    <!-- Inputs ocultos -->
-                                    <input type="hidden" name="marca" value="GLOBAL FINANCIAL SYSTEM">
-                                    <input type="hidden" name="medio" value="GOOGLE">
-                                    <input type="hidden" name="fecha" value="<?= date('Y-m-d') ?>">
-                                    <input type="hidden" name="landing" value="glo-800mil-g">
 
                                     <div class="d-grip gap-2">
                                         <button type="submit" name="save" class="btn btn-outline-success btn-block">¡Solicítalo YA!</button>
@@ -146,19 +150,6 @@
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-198115615-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-198115615-1');
-    </script>
 
     <!-- Animate on Scroll -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

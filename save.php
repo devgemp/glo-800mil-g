@@ -1,20 +1,8 @@
 <?php
 
-/** ------------- Comentar para producción ----------- */
-// $server = 'localhost';
-// $username = 'root';
-// $password = '';
-// $database = 'gempres1_tests';
+require('./database/connection.php');
 
-/** ---------- Descomentar para producción ----------- */
-$server = '209.59.139.98';
-$username = 'gempres1_root';
-$password = 'Dantesinferno064';
-$database = 'gempres1_gemp';
-
-$connection = mysqli_connect($server, $username, $password, $database);
-mysqli_set_charset($connection, 'utf8');
-
+// TODO: Validar que los campos estén completos cuando se envían...
 if (isset($_POST['save'])) {
     $nombres   = trim($_POST['nombres']);
     $apellidos = trim($_POST['apellidos']);
@@ -23,24 +11,52 @@ if (isset($_POST['save'])) {
     $correo    = $_POST['correo'];
     $telefono  = $_POST['telefono'];
     $importe   = $_POST['importe'];
-    $marca     = $_POST['marca'];
-    $medio     = $_POST['medio'];
-    $fecha     = $_POST['fecha'];
-    $landing   = $_POST['landing'];
+    $marca     = 'GLOBAL FINANCIAL SYSTEM';
+    $medio     = 'GOOGLE';
+    $fecha     = date('Y-m-d');
+    $landing   = 'glo-800mil-g';
 
-    $q = "SELECT COUNT(*) as contar from cliente where CORREO='$correo' and LANDING='$landing'";
-
+    /**
+     * * El correo del cliente solo debe de existir una sola vez en la DB
+     * * independientemente de que se registre desde otro landing o marca
+     */
+    $q = "SELECT COUNT(*) as contar from cliente where CORREO='$correo'";
     $consulta = mysqli_query($connection, $q);
     $array = mysqli_fetch_array($consulta);
 
     if ($array['contar'] > 0) {
         echo "
-      <script>
-        window.location = 'index.php';
-      </script>
+        <script>
+            alert('Tus datos han sido procesados, en breve nos comunicaremos contigo');
+            window.location = 'index.php';
+        </script>
     ";
     } else {
         $query = "INSERT INTO cliente(NOMBRE, APELLIDOS, EDAD, SEXO, CORREO, TELEFONO, IMPORTE, MARCA, MEDIO, FECHA, LANDING) VALUES ('$nombres', '$apellidos', '$edad', '$sexo', '$correo', '$telefono', '$importe', '$marca', '$medio', '$fecha', '$landing')";
+
+        /**
+         * * Email con datos del cliente para el gerente
+         * * contacto@globalfinancials.com.mx
+         */
+        $header  = "From web@globalfinancials.com.mx" . "\r\n";
+        $header .= "Reply-To: web@globalfinancials.com.mx" . "\r\n";
+
+        /**
+         * * Datos del email
+         */
+        $email  = "contacto@globalfinancials.com.mx";
+        $asunto = "Nuevo Contacto";
+
+        $msg  = 'Nombre Completo : ' . $nombres . "\n";
+        $msg .= 'Apellidos: ' . $apellidos . "\n";
+        $msg .= 'Correo Electronico: ' . $correo . "\n";
+        $msg .= 'Telefono : ' . $telefono . "\n";
+        $msg .= 'Importe : ' . $importe . "\n";
+        $msg .= 'Medio : ' . $medio . "\n";
+        $msg .= 'Landing : ' . $landing;
+
+        // Enviar email
+        $mail = mail($email, $asunto, $msg, $header);
 
         $result = mysqli_query($connection, $query);
 
